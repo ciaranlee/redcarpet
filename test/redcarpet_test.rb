@@ -134,6 +134,11 @@ class MarkdownTest < Test::Unit::TestCase
     html_equal "<p>before</p>\n\n<div>\n  foo\n</div>\n\n<p>after</p>\n", markdown
   end
 
+  def test_html_header_oddity
+    markdown = @markdown.render("<h1>header</h1>\nparagraph 1")
+    html_equal "<h1>header</h1>\n<p>paragraph 1</p>", markdown
+  end
+
   def test_that_html_blocks_do_not_require_their_own_end_tag_line
     markdown = @markdown.render("Para 1\n\n<div><pre>HTML block\n</pre></div>\n\nPara 2 [Link](#anchor)")
     html_equal "<p>Para 1</p>\n\n<div><pre>HTML block\n</pre></div>\n\n<p>Para 2 <a href=\"#anchor\">Link</a></p>\n",
